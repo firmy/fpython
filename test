@@ -1,3 +1,8 @@
 git add test
 git commit -m "test"
 git push
+ 2099  git log test 
+ 2104  git show 4d55999899ed717ac5902029a46fe1847637dc1f
+ 2105  git log test
+ 2106  git show ee7cc7b15ae5e63325945a52c110c5ac43dbe8c6
+ 2107  history | tail >> test
