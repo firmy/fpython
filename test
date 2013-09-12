@@ -6,3 +6,4 @@ git push
  2105  git log test
  2106  git show ee7cc7b15ae5e63325945a52c110c5ac43dbe8c6
  2107  history | tail >> test
+aaa
