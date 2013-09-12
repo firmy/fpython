@@ -1,0 +1,4 @@
+ 2080  git push
+ 2081  history
+ 2082  history | tail -4
+ 2083  history | tail -4 > test
