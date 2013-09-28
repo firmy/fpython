@@ -14,10 +14,14 @@ class timer(threading.Thread,file):
         self.thread_stop = False
 
     def run(self):
+        count = 0
         while not self.thread_stop:
+            count += 1
             cnt = "thread object(%d),Time:%s\n" %(self.thread_num,time.ctime())
             writeFile(self.file,cnt)
             time.sleep(self.interval)
+            if(count>5):
+                self.thread_stop = True
 
     def stop(self):
         self.thread_stop = True
@@ -25,8 +29,30 @@ class timer(threading.Thread,file):
 
 def test():
     array = range(5)
+    threadlist = []
     for i in array:
-       timer(i,1,str(i)+".txt").start()
+        #create thread
+       th = timer(i,i,str(i)+".txt")
+       #start thread
+       th.start()
+       #record thread_id
+       threadlist.append([th,th.ident])
+
+    list = [x[0].ident for x in threadlist]
+    icount=0
+    while 1:
+        thidnum = [x.ident for x in threading.enumerate()]
+        print 'thidnume:%s' % str(thidnum)
+        print 'thidlist:%s' % str(list)
+
+        for thread in threadlist:
+            thid = thread[0].ident
+            info =thid,'isalive=',thread[0].isAlive()
+            print info
+        
+        time.sleep(2)
+
+
     
     time.sleep(30)
     #todo how to check the thread has ran over
