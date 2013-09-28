@@ -3,17 +3,20 @@
 
 import threading
 import time
-import sys
-class timer(threading.Thread):
-    def __init__(self,num,interval):
+from file import writeFile
+
+class timer(threading.Thread,file):
+    def __init__(self,num,interval,file):
         threading.Thread.__init__(self)
         self.thread_num = num
         self.interval = interval
+        self.file = file
         self.thread_stop = False
 
     def run(self):
         while not self.thread_stop:
-            print "thread object(%d),Time:%s\n" %(self.thread_num,time.ctime())
+            cnt = "thread object(%d),Time:%s\n" %(self.thread_num,time.ctime())
+            writeFile(self.file,cnt)
             time.sleep(self.interval)
 
     def stop(self):
@@ -21,13 +24,15 @@ class timer(threading.Thread):
 
 
 def test():
-    thread1 = timer(1,1)
-    thread2 = timer(5,1)
-    thread1.start()
-    thread2.start()
-    time.sleep(3)
-    thread1.stop()
-    thread2.stop()
+    array = range(5)
+    for i in array:
+       timer(i,1,str(i)+".txt").start()
+    
+    time.sleep(30)
+    #todo how to check the thread has ran over
+    #http://askandstudy.blog.163.com/blog/static/1997520582012143144847/
+#    thread1.stop()
+#    thread2.stop()
 
 if __name__ == '__main__':
     test()
