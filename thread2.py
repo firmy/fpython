@@ -41,17 +41,22 @@ def test():
     list = [x[0].ident for x in threadlist]
     icount=0
     while 1:
-        thidnum = [x.ident for x in threading.enumerate()]
-        print 'thidnume:%s' % str(thidnum)
-        print 'thidlist:%s' % str(list)
+#        thidnum = [x.ident for x in threading.enumerate()]
+#        print 'thidnume:%s' % str(thidnum)
+#        print 'thidlist:%s' % str(list)
 
+        print '=====================\n'
         for thread in threadlist:
             thid = thread[0].ident
             info =thid,'isalive=',thread[0].isAlive()
             print info
-        
+            if thread[0].isAlive():
+                try:
+                    thread[0].exit()
+                except:
+                    print(str(thread[0].getName()) + 'counld not be terminated')
+                
         time.sleep(2)
-
 
     
     time.sleep(30)
